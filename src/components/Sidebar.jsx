@@ -1,19 +1,27 @@
-import React from 'react'
 import {
   LayoutGrid,
-  Users,
-  Shirt,
-  BrainCircuit,
-  Settings,
+  Layers,
+  Palette,
+  SlidersHorizontal,
+  GitBranch,
+  Eye,
   Sparkles,
+  BrainCircuit,
+  Database,
+  Settings,
 } from 'lucide-react'
 
 const navItems = [
   { key: 'dashboard', label: 'Dashboard', icon: LayoutGrid },
-  { key: 'users', label: 'Quản lý người dùng', icon: Users },
-  { key: 'wardrobe', label: 'Kho tủ đồ', icon: Shirt },
-  { key: 'ai-rules', label: 'AI Rules & Training', icon: BrainCircuit },
-  { key: 'settings', label: 'Cài đặt', icon: Settings },
+  { key: 'categories', label: 'Danh mục (Categories)', icon: Layers },
+  { key: 'colors', label: 'Màu sắc (Colors)', icon: Palette },
+  { key: 'color-compat', label: 'Tương thích màu', icon: SlidersHorizontal },
+  { key: 'clothing-rules', label: 'Quy tắc phối đồ', icon: GitBranch },
+  { key: 'ai-analysis', label: 'AI Analysis', icon: Eye },
+  { key: 'recommendations', label: 'Gợi ý phối đồ', icon: Sparkles },
+  { key: 'ai-models', label: 'Mô hình AI', icon: BrainCircuit },
+  { key: 'dataset', label: 'Dataset Manager', icon: Database },
+  { key: 'settings', label: 'Hệ thống & Cài đặt', icon: Settings },
 ]
 
 export default function Sidebar({ active, onNavigate }) {
