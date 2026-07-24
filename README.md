@@ -166,19 +166,36 @@ Kết quả build sẽ nằm trong thư mục `dist/`.
 
 ---
 
-## 📊 Công thức tính điểm gợi ý phối đồ
+## 📊 Công thức tính điểm gợi ý phối đồ (Rule Engine v12)
 
-Hệ thống sử dụng công thức tổng hợp đa tiêu chí để đánh giá bộ trang phục:
+Hệ thống sử dụng **Hybrid Cold-Start Recommender** với 8 scorer modules để chấm điểm đa tiêu chí:
 
-$$Score = w_1 \cdot f_{fit} + w_2 \cdot f_{aesthetic} + w_3 \cdot f_{personal} + w_4 \cdot f_{trend}$$
+$$\text{Final Score} = \sum_{i \in \text{active scorers}} w_i^{\text{norm}} \times S_i \quad \text{(tất cả } S_i \in [0, 10]\text{)}$$
 
-Trong đó:
-- **$f_{fit}$** — Điểm phối đồ theo dáng người (FitMatrix 5 body shapes)
-- **$f_{aesthetic}$** — Điểm hài hòa màu sắc (HSL Color Rules)
-- **$f_{personal}$** — Điểm cá nhân hóa theo lịch sử người dùng
-- **$f_{trend}$** — Điểm xu hướng thời trang (dữ liệu cào từ TikTok/Instagram)
+### Bảng 8 Scorer & Trọng số gốc
 
-Admin có thể hiệu chỉnh trọng số $w_1, w_2, w_3, w_4$ thông qua các module quản lý.
+| Scorer | Trọng số gốc | Trạng thái | Mô tả |
+|--------|:------------:|:----------:|-------|
+| **Category/KBR** | 0.35 | 🟢 Luôn bật | Tra cặp category trong `fashion_rules.json` + nguồn Việt Nam. Polyvore × 1 + VN × 2 ÷ 3 |
+| **Color** | 0.35 | 🟢 Luôn bật | 70% Data Evidence Score + 30% Color Wheel Score (monochromatic → complementary) |
+| **User History** | 0.20 | 🔵 Optional | Học gu cá nhân từ event thật: view +0.2, like +1.5, wear +3.0, dislike -2.0 |
+| **Material** | 0.15 | 🔵 Optional | Tra cặp chất liệu trong `material_rules.json` (38 rule) |
+| **Trend** | 0.15 | 🔵 Optional | Cộng điểm từ TikTok/Facebook trend signals (76 signals). Rank 1-5 = +4đ |
+| **Occasion** | 0.10 | 🔵 Optional | casual / work / formal / party / travel — 843 quan sát từ 27 nguồn VN |
+| **Body Shape** | 0.10 | 🔵 Optional | pear / apple / inverted_triangle / rectangle / hourglass |
+| **Weather** | 0.10 | 🔵 Optional | hot / cold — 551 quan sát từ 18 nguồn VN |
+
+### Cơ chế Normalize động
+
+Trọng số tự chia lại theo số scorer đang bật, đảm bảo **tổng = 100%**:
+- Không bật optional: `Final = 50% Category + 50% Color`
+- Bật thêm Material + Occasion: Category 36.8%, Color 36.8%, Material 15.8%, Occasion 10.5%
+
+### Nguyên tắc Fallback
+
+Scorer nào **thiếu dữ liệu** nhận điểm **5/10 trung lập** (không phạt, không thưởng). Scorer **không bật** thì hoàn toàn không tham gia công thức.
+
+Admin có thể hiệu chỉnh trọng số, bật/tắt scorer và quản lý knowledge base qua các module trên dashboard.
 
 ---
 
