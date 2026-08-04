@@ -1,22 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from './components/Sidebar.jsx'
 import Topbar from './components/Topbar.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
-import CategoriesPage from './pages/CategoriesPage.jsx'
-import ColorsPage from './pages/ColorsPage.jsx'
-import ColorCompatPage from './pages/ColorCompatPage.jsx'
-import ClothingRulesPage from './pages/ClothingRulesPage.jsx'
-import AiAnalysisPage from './pages/AiAnalysisPage.jsx'
-import RecommendationsPage from './pages/RecommendationsPage.jsx'
-import AiModelsPage from './pages/AiModelsPage.jsx'
-import DatasetPage from './pages/DatasetPage.jsx'
-import SettingsPage from './pages/SettingsPage.jsx'
+import SampleCatalogPage from './pages/SampleCatalogPage.jsx'
+import UserManagementPage from './pages/UserManagementPage.jsx'
+import AiRulesPage from './pages/AiRulesPage.jsx'
+import AttributesPage from './pages/AttributesPage.jsx'
+import AiLogsPage from './pages/AiLogsPage.jsx'
+import api from './services/api.js'
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [active, setActive] = useState('dashboard')
+
+  useEffect(() => {
+    const token = localStorage.getItem('admin_token')
+    if (token) {
+      api.getCurrentUser()
+        .then(user => {
+          if ((user.role === 'Admin' || user.role === 'Stylist') && user.is_active) {
+            setCurrentUser(user)
+            setIsAuthenticated(true)
+          } else {
+            api.logout()
+          }
+        })
+        .catch(() => {
+          api.logout()
+        })
+    }
+  }, [])
 
   function handleLoginSuccess(user) {
     setCurrentUser(user)
@@ -24,6 +39,7 @@ export default function App() {
   }
 
   function handleLogout() {
+    api.logout()
     setIsAuthenticated(false)
     setCurrentUser(null)
     setActive('dashboard')
@@ -34,7 +50,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex min-h-screen bg-canvas">
+    <div className="flex min-h-screen bg-canvas dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Sidebar active={active} onNavigate={setActive} />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -42,24 +58,16 @@ export default function App() {
         <main className="flex-1 p-6">
           {active === 'dashboard' ? (
             <DashboardPage />
-          ) : active === 'categories' ? (
-            <CategoriesPage />
-          ) : active === 'colors' ? (
-            <ColorsPage />
-          ) : active === 'color-compat' ? (
-            <ColorCompatPage />
-          ) : active === 'clothing-rules' ? (
-            <ClothingRulesPage />
-          ) : active === 'ai-analysis' ? (
-            <AiAnalysisPage />
-          ) : active === 'recommendations' ? (
-            <RecommendationsPage />
-          ) : active === 'ai-models' ? (
-            <AiModelsPage />
-          ) : active === 'dataset' ? (
-            <DatasetPage />
-          ) : active === 'settings' ? (
-            <SettingsPage />
+          ) : active === 'sample-catalog' ? (
+            <SampleCatalogPage />
+          ) : active === 'users' ? (
+            <UserManagementPage />
+          ) : active === 'ai-rules' ? (
+            <AiRulesPage />
+          ) : active === 'attributes' ? (
+            <AttributesPage />
+          ) : active === 'ai-logs' ? (
+            <AiLogsPage />
           ) : (
             <div className="p-6">Trang không tồn tại</div>
           )}
@@ -68,3 +76,4 @@ export default function App() {
     </div>
   )
 }
+

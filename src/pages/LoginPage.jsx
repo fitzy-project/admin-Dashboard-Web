@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ShieldAlert, LogIn, Lock, User, AlertCircle, Eye, EyeOff } from 'lucide-react'
-import { adminAccounts } from '../data/mockData.js'
+import api from '../services/api.js'
 
 export default function LoginPage({ onLoginSuccess }) {
   const [username, setUsername] = useState('')
@@ -9,39 +9,36 @@ export default function LoginPage({ onLoginSuccess }) {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     setError('')
     setIsLoading(true)
 
-    // Simulate network delay
-    setTimeout(() => {
-      const foundAdmin = adminAccounts.find(
-        (adm) => adm.username === username.trim()
-      )
-
-      if (!foundAdmin) {
-        setError('Tài khoản quản trị viên không tồn tại!')
+    try {
+      await api.login(username.trim(), password)
+      const foundAdmin = await api.getCurrentUser()
+      
+      if (foundAdmin.role !== 'Admin' && foundAdmin.role !== 'Stylist') {
+        api.logout()
+        setError('Tài khoản của bạn không có quyền truy cập cổng quản trị!')
         setIsLoading(false)
         return
       }
 
-      if (foundAdmin.status !== 'active') {
+      if (!foundAdmin.is_active) {
+        api.logout()
         setError('Tài khoản của bạn đã bị khóa hoặc đình chỉ hoạt động!')
         setIsLoading(false)
         return
       }
 
-      if (foundAdmin.password !== password) {
-        setError('Mật khẩu không khớp!')
-        setIsLoading(false)
-        return
-      }
-
       // Success
-      setIsLoading(false)
       onLoginSuccess(foundAdmin)
-    }, 800)
+    } catch (err) {
+      setError(err.message || 'Tên đăng nhập hoặc mật khẩu không chính xác!')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (

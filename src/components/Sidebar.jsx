@@ -1,28 +1,22 @@
 import {
   LayoutGrid,
-  Layers,
-  Palette,
+  Shirt,
+  Users,
   SlidersHorizontal,
-  GitBranch,
-  Eye,
-  Sparkles,
-  BrainCircuit,
-  Database,
-  Settings,
+  Layers,
+  ClipboardList,
+  Sparkles
 } from 'lucide-react'
 
 const navItems = [
-  { key: 'dashboard', label: 'Dashboard', icon: LayoutGrid },
-  { key: 'categories', label: 'Danh mục (Categories)', icon: Layers },
-  { key: 'colors', label: 'Màu sắc (Colors)', icon: Palette },
-  { key: 'color-compat', label: 'Tương thích màu', icon: SlidersHorizontal },
-  { key: 'clothing-rules', label: 'Quy tắc phối đồ', icon: GitBranch },
-  { key: 'ai-analysis', label: 'AI Analysis', icon: Eye },
-  { key: 'recommendations', label: 'Gợi ý phối đồ', icon: Sparkles },
-  { key: 'ai-models', label: 'Mô hình AI', icon: BrainCircuit },
-  { key: 'dataset', label: 'Dataset Manager', icon: Database },
-  { key: 'settings', label: 'Hệ thống & Cài đặt', icon: Settings },
+  { key: 'dashboard', label: 'Thống kê & Tổng quan', icon: LayoutGrid },
+  { key: 'sample-catalog', label: 'Quản lý Thư viện Mẫu', icon: Shirt },
+  { key: 'users', label: 'Quản lý Người dùng', icon: Users },
+  { key: 'ai-rules', label: 'Quy tắc AI & Phối màu', icon: SlidersHorizontal },
+  { key: 'attributes', label: 'Danh mục & Thuộc tính', icon: Layers },
+  { key: 'ai-logs', label: 'Nhật ký AI & Kiểm duyệt', icon: ClipboardList },
 ]
+
 
 export default function Sidebar({ active, onNavigate }) {
   return (

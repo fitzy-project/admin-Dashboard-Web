@@ -1,263 +1,429 @@
-// Dữ liệu giả lập cho Hệ thống Quản trị Fitzy Admin (10 Modules chuyên biệt)
+// Dữ liệu giả lập cho Hệ thống Quản trị Fitzy Admin (6 Phân hệ Core mới)
 
-// 1. Dashboard Stats
-export const summaryStats = [
+// 1. Dashboard & Analytics Stats
+export const dashboardStats = {
+  totalUsers: '14,250',
+  activeToday: '1,840',
+  totalSampleItems: '32',
+  outfitsCreatedDaily: '4,510',
+  aiScansCount: '89,420',
+};
+
+export const userGrowthData = [
+  { name: 'Tuần 1', users: 1200 },
+  { name: 'Tuần 2', users: 1800 },
+  { name: 'Tuần 3', users: 2400 },
+  { name: 'Tuần 4', users: 3100 },
+  { name: 'Tuần 5', users: 4500 },
+  { name: 'Tuần 6', users: 6200 },
+  { name: 'Tuần 7', users: 8900 },
+  { name: 'Tuần 8', users: 14250 },
+];
+
+export const mainCategoryDistribution = [
+  { name: 'Áo', value: 45, color: '#6366F1' },     // Indigo
+  { name: 'Quần', value: 35, color: '#3B82F6' },    // Blue
+  { name: 'Đồ bộ', value: 20, color: '#10B981' },   // Green
+];
+
+export const topBrands = [
+  { name: 'Coolmate', count: 4800, percentage: 34 },
+  { name: 'Uniqlo', count: 3200, percentage: 22 },
+  { name: 'Routine', count: 2500, percentage: 17 },
+  { name: 'Canifa', count: 1800, percentage: 12 },
+  { name: 'Zara', count: 1200, percentage: 8 },
+];
+
+export const topColors = [
+  { name: 'Black', count: 5200, hex: '#000000' },
+  { name: 'White', count: 4300, hex: '#FFFFFF' },
+  { name: 'Navy', count: 2800, hex: '#1E3A8A' },
+  { name: 'Beige', count: 2400, hex: '#F5F5DC' },
+  { name: 'Grey', count: 1900, hex: '#6B7280' },
+];
+
+// 2. Sample Clothing Catalog (30+ món đồ mẫu chuẩn)
+export const sampleCatalogItems = [
   {
-    id: 'processed_images',
-    label: 'Tổng ảnh đã xử lý',
-    value: '84,200',
-    delta: '+3.4%',
-    trend: 'up',
+    id: 'SMP-001',
+    name: 'Áo thun Basic Cotton cổ tròn',
+    category: 'Áo',
+    subcategory: 't-shirts',
+    brand: 'Coolmate',
+    colorName: 'Trắng',
+    colorHex: '#FFFFFF',
+    material: 'Cotton',
+    season: 'Xuân/Hè',
+    imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=200&q=80',
+    tags: 'Casual, Basic',
   },
   {
-    id: 'system_items',
-    label: 'Tổng item hệ thống',
-    value: '76,500',
-    delta: '+4.1%',
-    trend: 'up',
+    id: 'SMP-002',
+    name: 'Áo sơ mi Oxford dài tay',
+    category: 'Áo',
+    subcategory: 'shirts',
+    brand: 'Uniqlo',
+    colorName: 'Xanh nhạt',
+    colorHex: '#BFDBFE',
+    material: 'Oxford Cotton',
+    season: 'Tất cả',
+    imageUrl: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=200&q=80',
+    tags: 'Office, Elegant',
   },
   {
-    id: 'outfits_created',
-    label: 'Tổng outfit được tạo',
-    value: '31,800',
-    delta: '+8.2%',
-    trend: 'up',
+    id: 'SMP-003',
+    name: 'Áo khoác gió bomber gió cản nước',
+    category: 'Áo',
+    subcategory: 'jackets',
+    brand: 'Routine',
+    colorName: 'Đen',
+    colorHex: '#000000',
+    material: 'Polyester',
+    season: 'Thu/Đông',
+    imageUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=200&q=80',
+    tags: 'Casual, Sporty',
   },
   {
-    id: 'ai_scans',
-    label: 'Số lượt AI phân tích',
-    value: '124,500',
-    delta: '+11.5%',
-    trend: 'up',
+    id: 'SMP-004',
+    name: 'Quần jeans ống đứng classic',
+    category: 'Quần',
+    subcategory: 'straight-leg_pants',
+    brand: 'Coolmate',
+    colorName: 'Xanh Navy',
+    colorHex: '#1E3A8A',
+    material: 'Denim',
+    season: 'Tất cả',
+    imageUrl: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=200&q=80',
+    tags: 'Casual, Classic',
   },
-]
-
-export const aiVersionInfo = {
-  currentModel: 'YOLOv8n-Fitzy',
-  version: 'v1.2',
-  accuracy: '93.0%',
-  latency: '12 ms',
-  lastUpdated: '08/07/2026',
-}
-
-export const uploadsByDay = [
-  { day: 'T2', uploads: 420 },
-  { day: 'T3', uploads: 512 },
-  { day: 'T4', uploads: 478 },
-  { day: 'T5', uploads: 610 },
-  { day: 'T6', uploads: 705 },
-  { day: 'T7', uploads: 890 },
-  { day: 'CN', uploads: 760 },
-]
-
-export const categoryDistribution = [
-  { name: 'T-Shirt', value: 35, color: '#F59E0B' },
-  { name: 'Jeans', value: 20, color: '#3B82F6' },
-  { name: 'Jacket', value: 15, color: '#10B981' },
-  { name: 'Dress', value: 12, color: '#EC4899' },
-  { name: 'Shoes', value: 10, color: '#8B5CF6' },
-  { name: 'Khác', value: 8, color: '#64748B' },
-]
-
-export const colorDistribution = [
-  { name: 'Black', value: 30, color: '#000000' },
-  { name: 'White', value: 25, color: '#E2E8F0' },
-  { name: 'Beige', value: 15, color: '#F5F5DC' },
-  { name: 'Navy', value: 12, color: '#000080' },
-  { name: 'Grey', value: 10, color: '#808080' },
-  { name: 'Khác', value: 8, color: '#94A3B8' },
-]
-
-// 2. Categories
-export const categoriesList = [
-  { id: 'CAT-01', name: 'T-Shirt', slug: 't-shirt', itemCount: 26800, description: 'Áo thun ngắn tay, dài tay các loại' },
-  { id: 'CAT-02', name: 'Shirt', slug: 'shirt', itemCount: 12400, description: 'Áo sơ mi nam, nữ công sở và dạo phố' },
-  { id: 'CAT-03', name: 'Hoodie', slug: 'hoodie', itemCount: 5100, description: 'Áo nỉ có mũ giữ ấm' },
-  { id: 'CAT-04', name: 'Jacket', slug: 'jacket', itemCount: 8200, description: 'Áo khoác gió, khoác bò, blazer' },
-  { id: 'CAT-05', name: 'Jeans', slug: 'jeans', itemCount: 14500, description: 'Quần jeans bò các kiểu dáng' },
-  { id: 'CAT-06', name: 'Dress', slug: 'dress', itemCount: 4200, description: 'Váy liền, đầm dự tiệc' },
-  { id: 'CAT-07', name: 'Shoes', slug: 'shoes', itemCount: 3800, description: 'Giày sneaker, giày tây, cao gót' },
-  { id: 'CAT-08', name: 'Bag', slug: 'bag', itemCount: 1500, description: 'Túi xách, balo phụ kiện' },
-]
-
-// 3. Colors
-export const colorsList = [
-  { id: 'COL-01', name: 'Black', hex: '#000000', description: 'Màu đen tiêu chuẩn' },
-  { id: 'COL-02', name: 'White', hex: '#FFFFFF', description: 'Màu trắng tinh khiết' },
-  { id: 'COL-03', name: 'Beige', hex: '#F5F5DC', description: 'Màu kem/be nhạt ấm áp' },
-  { id: 'COL-04', name: 'Navy', hex: '#000080', description: 'Màu xanh navy đậm' },
-  { id: 'COL-05', name: 'Grey', hex: '#808080', description: 'Màu xám trung tính' },
-  { id: 'COL-06', name: 'Red', hex: '#FF0000', description: 'Màu đỏ nổi bật' },
-  { id: 'COL-07', name: 'Green', hex: '#008000', description: 'Màu xanh lá cây' },
-  { id: 'COL-08', name: 'Blue', hex: '#0000FF', description: 'Màu xanh dương' },
-]
-
-// 4. Color Compatibility
-export const colorCompatibilityRules = [
-  { id: 'CC-01', color1: 'Black', color2: 'White', score: 10, note: 'Độ tương phản tuyệt đối, tối giản thanh lịch.', active: true },
-  { id: 'CC-02', color1: 'Black', color2: 'Beige', score: 9, note: 'Tông màu ấm phối hợp hài hòa ấm áp.', active: true },
-  { id: 'CC-03', color1: 'Blue', color2: 'White', score: 8, note: 'Mang lại cảm giác trẻ trung, năng động.', active: true },
-  { id: 'CC-04', color1: 'Red', color2: 'Green', score: 2, note: 'Tương phản màu bổ sung cực mạnh, khó mặc phối.', active: true },
-  { id: 'CC-05', color1: 'Navy', color2: 'Grey', score: 9, note: 'Phối màu công sở lịch lãm và trang nhã.', active: true },
-  { id: 'CC-06', color1: 'Beige', color2: 'White', score: 9, note: 'Phong cách Tone-on-Tone dịu mát.', active: true },
-]
-
-// 5. Clothing Rules (Tri thức phối đồ)
-export const clothingRules = [
-  { id: 'CR-01', topCategory: 'Hoodie', bottomCategory: 'Jeans', occasion: 'Casual', score: 10, active: true, name: 'Casual Streetwear Classic' },
-  { id: 'CR-02', topCategory: 'Shirt', bottomCategory: 'Jeans', occasion: 'Office', score: 9, active: true, name: 'Business Casual Smart' },
-  { id: 'CR-03', topCategory: 'T-Shirt', bottomCategory: 'Jeans', occasion: 'Casual', score: 9, active: true, name: 'Simple Everyday Go' },
-  { id: 'CR-04', topCategory: 'Jacket', bottomCategory: 'Jeans', occasion: 'Sporty', score: 8, active: true, name: 'Active Denim Vibe' },
-  { id: 'CR-05', topCategory: 'Shirt', bottomCategory: 'Jeans', occasion: 'Party', score: 7, active: false, name: 'Fancy Denim Mix' },
-]
-
-// 6. AI Analysis Logs (YOLO & K-Means output - ANONYMIZED)
-export const aiAnalysisLogs = [
   {
-    id: 'ANA-9001',
-    imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80',
-    detectedType: 'T-Shirt',
-    confidence: 0.96,
-    colorName: 'Red',
-    hexColor: '#FF0000',
-    box: [0.15, 0.22, 0.85, 0.9],
-    inferenceTimeMs: 11,
-    modelName: 'YOLOv8n',
-    version: 'v1.2',
+    id: 'SMP-005',
+    name: 'Quần tây nam xếp ly công sở',
+    category: 'Quần',
+    subcategory: 'full_length_pants',
+    brand: 'Routine',
+    colorName: 'Xám đậm',
+    colorHex: '#374151',
+    material: 'Wool Blend',
+    season: 'Tất cả',
+    imageUrl: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=200&q=80',
+    tags: 'Office, Formal',
+  },
+  {
+    id: 'SMP-006',
+    name: 'Bộ nỉ mặc nhà Cozy Set',
+    category: 'Đồ bộ',
+    subcategory: 'lounge_sets',
+    brand: 'Canifa',
+    colorName: 'Beige',
+    colorHex: '#F5F5DC',
+    material: 'Nỉ bông',
+    season: 'Thu/Đông',
+    imageUrl: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=200&q=80',
+    tags: 'Home, Casual',
+  },
+  {
+    id: 'SMP-007',
+    name: 'Bộ thể thao Active Pro',
+    category: 'Đồ bộ',
+    subcategory: 'sport_sets',
+    brand: 'Coolmate',
+    colorName: 'Xanh rêu',
+    colorHex: '#3F6212',
+    material: 'Spandex Polyester',
+    season: 'Xuân/Hè',
+    imageUrl: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=200&q=80',
+    tags: 'Sporty, Active',
+  },
+  {
+    id: 'SMP-008',
+    name: 'Áo kiểu Blouse nữ tay phồng',
+    category: 'Áo',
+    subcategory: 'blouses',
+    brand: 'Zara',
+    colorName: 'Kem',
+    colorHex: '#FFFDF0',
+    material: 'Vải suông Chiffon',
+    season: 'Xuân/Hè',
+    imageUrl: 'https://images.unsplash.com/photo-1548624149-f9b1859aa7d0?auto=format&fit=crop&w=200&q=80',
+    tags: 'Elegant, Basic',
+  },
+  {
+    id: 'SMP-009',
+    name: 'Quần tây ống rộng palazzo nữ',
+    category: 'Quần',
+    subcategory: 'wide-leg_and_palazzo_pants',
+    brand: 'Zara',
+    colorName: 'Đen',
+    colorHex: '#000000',
+    material: 'Tuyết mưa',
+    season: 'Tất cả',
+    imageUrl: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=200&q=80',
+    tags: 'Office, Modern',
+  },
+  {
+    id: 'SMP-010',
+    name: 'Áo thun dài tay giữ nhiệt Heattech',
+    category: 'Áo',
+    subcategory: 'long_sleeved_tops',
+    brand: 'Uniqlo',
+    colorName: 'Trắng xám',
+    colorHex: '#F3F4F6',
+    material: 'Heattech Polyester',
+    season: 'Thu/Đông',
+    imageUrl: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=200&q=80',
+    tags: 'Basic, KeepWarm',
+  },
+  {
+    id: 'SMP-011',
+    name: 'Áo croptop thun gân ôm sát',
+    category: 'Áo',
+    subcategory: 'short_sleeve_tops',
+    brand: 'Zara',
+    colorName: 'Nâu nhạt',
+    colorHex: '#A16207',
+    material: 'Ribbed Cotton',
+    season: 'Xuân/Hè',
+    imageUrl: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=200&q=80',
+    tags: 'Streetwear, Youthful',
+  },
+  {
+    id: 'SMP-012',
+    name: 'Áo ba lỗ nam thể thao sát nách',
+    category: 'Áo',
+    subcategory: 'sleeveless_and_tank_tops',
+    brand: 'Coolmate',
+    colorName: 'Đen',
+    colorHex: '#000000',
+    material: 'Polyester Mesh',
+    season: 'Xuân/Hè',
+    imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
+    tags: 'Gym, Sporty',
+  },
+  {
+    id: 'SMP-013',
+    name: 'Quần lửng kaki túi hộp năng động',
+    category: 'Quần',
+    subcategory: 'cropped_pants',
+    brand: 'Canifa',
+    colorName: 'Vàng Kaki',
+    colorHex: '#D97706',
+    material: 'Kaki Cotton',
+    season: 'Xuân/Hè',
+    imageUrl: 'https://images.unsplash.com/photo-1565084888279-aca607ecad0c?auto=format&fit=crop&w=200&q=80',
+    tags: 'Casual, Streetwear',
+  },
+  {
+    id: 'SMP-014',
+    name: 'Quần jeans nữ skinny co giãn',
+    category: 'Quần',
+    subcategory: 'skinny_pants',
+    brand: 'Zara',
+    colorName: 'Xanh bò nhạt',
+    colorHex: '#93C5FD',
+    material: 'Stretch Denim',
+    season: 'Tất cả',
+    imageUrl: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=200&q=80',
+    tags: 'Casual, Basic',
+  },
+  {
+    id: 'SMP-015',
+    name: 'Quần dài túi hộp Cargo nam',
+    category: 'Quần',
+    subcategory: 'cargo_pants',
+    brand: 'Routine',
+    colorName: 'Xanh ô liu',
+    colorHex: '#1E293B',
+    material: 'Ripstop Cotton',
+    season: 'Tất cả',
+    imageUrl: 'https://images.unsplash.com/photo-1517423568366-8b83523034fd?auto=format&fit=crop&w=200&q=80',
+    tags: 'Military, Streetwear',
+  }
+];
+
+// 3. User Management (Danh sách người dùng đăng ký)
+export const mockUsers = [
+  {
+    id: 'USR-001',
+    email: 'hoang.nam@gmail.com',
+    displayName: 'Hoàng Nam',
+    role: 'User',
+    status: 'active',
+    registerDate: '12/04/2026',
+    itemCount: 42,
+    bodyShape: 'Hình chữ nhật (Rectangle)',
+    stylePref: 'Minimalist, Sporty',
+    colorProfile: 'Deep Autumn (Mùa thu trầm)',
+  },
+  {
+    id: 'USR-002',
+    email: 'thuy.trang@gmail.com',
+    displayName: 'Thùy Trang',
+    role: 'User',
+    status: 'active',
+    registerDate: '08/05/2026',
+    itemCount: 85,
+    bodyShape: 'Đồng cát (Hourglass)',
+    stylePref: 'Elegant, Vintage',
+    colorProfile: 'Light Spring (Mùa xuân sáng)',
+  },
+  {
+    id: 'USR-003',
+    email: 'quoc.bao@gmail.com',
+    displayName: 'Quốc Bảo',
+    role: 'Stylist',
+    status: 'active',
+    registerDate: '24/02/2026',
+    itemCount: 15,
+    bodyShape: 'Tam giác ngược (Inverted)',
+    stylePref: 'Smart Casual, Classic',
+    colorProfile: 'Cool Winter (Mùa đông lạnh)',
+  },
+  {
+    id: 'USR-004',
+    email: 'ngoc.anh@hotmail.com',
+    displayName: 'Ngọc Anh',
+    role: 'User',
+    status: 'banned',
+    registerDate: '19/06/2026',
+    itemCount: 56,
+    bodyShape: 'Quả lê (Pear)',
+    stylePref: 'Cute, Casual',
+    colorProfile: 'Soft Summer (Mùa hè dịu)',
+  },
+  {
+    id: 'USR-005',
+    email: 'admin.minh@fitzy.app',
+    displayName: 'Minh Hoàng',
+    role: 'Admin',
+    status: 'active',
+    registerDate: '01/01/2026',
+    itemCount: 0,
+    bodyShape: 'Chưa cập nhật',
+    stylePref: 'Chưa cập nhật',
+    colorProfile: 'Chưa cập nhật',
+  }
+];
+
+// 4. AI Rules & Compatibility (Phối màu & phối chất liệu)
+export const initialColorMatrix = [
+  { id: 'CM-001', color1: 'Trắng', color2: 'Đen', compatibility: 'excellent', score: 10, notes: 'Tương phản kinh điển, phong cách tối giản thanh lịch' },
+  { id: 'CM-002', color1: 'Xanh Navy', color2: 'Beige', compatibility: 'excellent', score: 9, notes: 'Hài hòa, sang trọng lịch lãm' },
+  { id: 'CM-003', color1: 'Xám đậm', color2: 'Trắng', compatibility: 'good', score: 8, notes: 'Màu trung tính rất dễ phối đồ hằng ngày' },
+  { id: 'CM-004', color1: 'Đỏ tươi', color2: 'Xanh lá cây', compatibility: 'avoid', score: 2, notes: 'Bị cấm - Hai màu bổ sung độ tương phản quá gắt' },
+  { id: 'CM-005', color1: 'Đen', color2: 'Đỏ', compatibility: 'good', score: 8, notes: 'Tương phản mạnh mẽ cá tính' },
+  { id: 'CM-006', color1: 'Xanh ô liu', color2: 'Nâu', compatibility: 'good', score: 7, notes: 'Tone màu đất tự nhiên' },
+];
+
+export const initialIncompatibleCombos = [
+  { id: 'IC-001', item1: 'Áo thun thể thao', item2: 'Quần tây công sở', reason: 'Hai phong cách Sporty và Formal chọi nhau gay gắt', severity: 'High' },
+  { id: 'IC-002', item1: 'Áo hoodie nỉ dày', item2: 'Váy công sở xếp ly', reason: 'Tỷ lệ form dáng cồng kềnh mất cân đối', severity: 'Medium' },
+  { id: 'IC-003', item1: 'Áo phông ba lỗ', item2: 'Quần tây công sở', reason: 'Thiếu lịch sự, chênh lệch ngữ cảnh sử dụng', severity: 'High' },
+];
+
+export const initialStylistNotes = [
+  { id: 'SN-001', name: 'Quy tắc 3 màu tối đa', ruleText: 'Hệ thống gợi ý không được vượt quá 3 tông màu khác nhau trên cùng một outfit để tránh rối mắt.', active: true },
+  { id: 'SN-002', name: 'Nguyên tắc tôn dáng quả lê', ruleText: 'Đối với dáng người quả lê, ưu tiên áo sáng màu, có họa tiết đi kèm quần tối màu ống suông rộng.', active: true },
+  { id: 'SN-003', name: 'Monochromatic Tonal Shift', ruleText: 'Khi phối đồ một màu (monochromatic), ưu tiên dùng các sắc độ sáng tối khác nhau của cùng màu gốc.', active: true },
+];
+
+// 5. Attributes lists
+export const masterBrandsList = [
+  { id: 'BR-01', name: 'Coolmate', country: 'Việt Nam' },
+  { id: 'BR-02', name: 'Uniqlo', country: 'Nhật Bản' },
+  { id: 'BR-03', name: 'Routine', country: 'Việt Nam' },
+  { id: 'BR-04', name: 'Canifa', country: 'Việt Nam' },
+  { id: 'BR-05', name: 'Zara', country: 'Tây Ban Nha' },
+];
+
+export const masterMaterialsList = [
+  { id: 'MAT-01', name: 'Cotton', description: 'Vải cotton thoáng mát hút mồ hôi' },
+  { id: 'MAT-02', name: 'Denim', description: 'Vải bò bền bỉ, dày dặn cá tính' },
+  { id: 'MAT-03', name: 'Kaki', description: 'Vải dệt chéo dẻo dai đứng dáng' },
+  { id: 'MAT-04', name: 'Nỉ bông', description: 'Giữ ấm tốt, chất vải bông mềm' },
+  { id: 'MAT-05', name: 'Vải suông Chiffon', description: 'Mềm mại rủ nhẹ thanh lịch' },
+];
+
+export const masterColorsList = [
+  { id: 'COL-01', name: 'Trắng', hex: '#FFFFFF' },
+  { id: 'COL-02', name: 'Đen', hex: '#000000' },
+  { id: 'COL-03', name: 'Xanh Navy', hex: '#1E3A8A' },
+  { id: 'COL-04', name: 'Beige', hex: '#F5F5DC' },
+  { id: 'COL-05', name: 'Xám đậm', hex: '#374151' },
+];
+
+// 6. AI Scan History & Moderation Logs
+export const mockAiLogs = [
+  {
+    id: 'LOG-9101',
+    imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=300&q=80',
+    detectedClass: 't-shirts',
+    colorHex: '#FFFFFF',
+    colorName: 'Trắng',
+    confidence: '96.2%',
     status: 'success',
-    createdAt: '10/07/2026 10:45',
+    scanDate: '31/07/2026 14:22',
   },
   {
-    id: 'ANA-9002',
-    imageUrl: 'https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=900&q=80',
-    detectedType: 'Jacket',
-    confidence: 0.91,
-    colorName: 'Blue',
-    hexColor: '#0000FF',
-    box: [0.08, 0.15, 0.92, 0.85],
-    inferenceTimeMs: 13,
-    modelName: 'YOLOv8n',
-    version: 'v1.2',
-    status: 'success',
-    createdAt: '10/07/2026 10:32',
-  },
-  {
-    id: 'ANA-9003',
-    imageUrl: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=900&q=80',
-    detectedType: 'Jeans',
-    confidence: 0.74,
-    colorName: 'Navy',
-    hexColor: '#000080',
-    box: [0.2, 0.1, 0.8, 0.95],
-    inferenceTimeMs: 14,
-    modelName: 'YOLOv8n',
-    version: 'v1.1',
+    id: 'LOG-9102',
+    imageUrl: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=300&q=80',
+    detectedClass: 'straight-leg_pants',
+    colorHex: '#1E3A8A',
+    colorName: 'Xanh Navy',
+    confidence: '78.5%',
     status: 'review',
-    createdAt: '10/07/2026 09:15',
+    scanDate: '31/07/2026 13:05',
   },
   {
-    id: 'ANA-9004',
-    imageUrl: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=80',
-    detectedType: 'Bag',
-    confidence: 0.42,
-    colorName: 'Black',
-    hexColor: '#000000',
-    box: [0.3, 0.3, 0.7, 0.7],
-    inferenceTimeMs: 18,
-    modelName: 'YOLOv8n',
-    version: 'v1.2',
+    id: 'LOG-9103',
+    imageUrl: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=300&q=80',
+    detectedClass: 'shirts',
+    colorHex: '#BFDBFE',
+    colorName: 'Xanh nhạt',
+    confidence: '92.1%',
+    status: 'success',
+    scanDate: '30/07/2026 18:41',
+  },
+  {
+    id: 'LOG-9104',
+    imageUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=300&q=80',
+    detectedClass: 'jackets',
+    colorHex: '#000000',
+    colorName: 'Đen',
+    confidence: '45.8%',
     status: 'failed',
-    createdAt: '10/07/2026 08:04',
-  },
-]
+    scanDate: '29/07/2026 09:12',
+  }
+];
 
-// 7. Recommendations History (Lịch sử gợi ý phối đồ ẩn danh)
-export const recommendationsList = [
+export const mockFalseDetectionReports = [
   {
-    id: 'REC-5001',
-    outfitItems: ['T-Shirt (White)', 'Jeans (Blue)', 'Shoes (White)'],
-    score: 9.2,
-    rulesApplied: ['CR-03 (Simple Everyday Go)', 'CC-03 (Blue + White)'],
-    createdAt: '10/07/2026 10:48',
-  },
-  {
-    id: 'REC-5002',
-    outfitItems: ['Shirt (Beige)', 'Jeans (Black)', 'Jacket (Black)'],
-    score: 8.9,
-    rulesApplied: ['CR-02 (Business Casual Smart)', 'CC-02 (Black + Beige)'],
-    createdAt: '10/07/2026 10:20',
+    id: 'REP-001',
+    logId: 'LOG-9104',
+    userName: 'Hoàng Nam',
+    imageUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=300&q=80',
+    aiPrediction: 'Đồ bộ (lounge_sets)',
+    userCorrection: 'Áo khoác (jackets)',
+    notes: 'Đây là áo khoác da bomber chứ không phải đồ bộ mặc nhà.',
+    reportDate: '29/07/2026 10:15',
+    status: 'pending',
   },
   {
-    id: 'REC-5003',
-    outfitItems: ['Hoodie (Grey)', 'Jeans (Blue)', 'Shoes (White)'],
-    score: 9.5,
-    rulesApplied: ['CR-01 (Casual Streetwear Classic)', 'CC-03 (Blue + White)'],
-    createdAt: '10/07/2026 09:55',
-  },
-]
+    id: 'REP-002',
+    logId: 'LOG-9102',
+    userName: 'Thùy Trang',
+    imageUrl: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=300&q=80',
+    aiPrediction: 'Quần lửng (cropped_pants)',
+    userCorrection: 'Quần ống đứng (straight-leg_pants)',
+    notes: 'Quần dài bò mặc đứng chân chứ không phải quần lửng chín tấc.',
+    reportDate: '31/07/2026 14:00',
+    status: 'resolved',
+  }
+];
 
-// 8. AI Models
-export const aiModelsList = [
-  { id: 'MOD-01', name: 'YOLOv8n', version: 'v1.2', updateDate: '08/07/2026', accuracy: '93.0%', latency: '12 ms', active: true },
-  { id: 'MOD-02', name: 'K-Means Color Extractor', version: 'v1.0', updateDate: '01/06/2026', accuracy: '95.0%', latency: '15 ms', active: true },
-  { id: 'MOD-03', name: 'Decision Tree Recommender', version: 'v1.1', updateDate: '12/06/2026', accuracy: '89.0%', latency: '5 ms', active: true },
-]
-
-// 9. Dataset Manager
-export const datasetList = [
-  { id: 'DAT-01', name: 'Fitzy Train Dataset', type: 'train', imageCount: 62000, status: 'Active' },
-  { id: 'DAT-02', name: 'Fitzy Validation Dataset', type: 'validation', imageCount: 12200, status: 'Active' },
-  { id: 'DAT-03', name: 'Fitzy Test Dataset', type: 'test', imageCount: 10000, status: 'Active' },
-]
-
-// 10. System Settings (Admins, Roles, System Logs)
+// Accounts for testing
 export const adminAccounts = [
   { username: 'duc.nguyen', name: 'Đức Nguyễn', role: 'Super Admin', email: 'duc.nguyen@fitzy.app', status: 'active', password: 'admin123', initials: 'ĐN' },
   { username: 'stylist.thao', name: 'Thảo Phạm (Stylist)', role: 'Stylist Lead', email: 'thao.stylist@fitzy.app', status: 'active', password: 'admin123', initials: 'TP' },
   { username: 'researcher.ai', name: 'Minh Lê (AI Specialist)', role: 'AI Researcher', email: 'minh.ai@fitzy.app', status: 'active', password: 'admin123', initials: 'ML' },
-]
-
-export const rolesList = [
-  { role: 'Super Admin', permissions: 'Toàn quyền cấu hình, quản trị tài khoản, cập nhật AI models' },
-  { role: 'Stylist Lead', permissions: 'Xem logs, CRUD danh mục, màu sắc, quy tắc phối màu, quy tắc phối đồ' },
-  { role: 'AI Researcher', permissions: 'Quản trị AI models, Dataset, xem AI Analysis logs, cấu hình model version' },
-]
-
-export const systemLogs = [
-  { id: 'LOG-7701', timestamp: '10/07/2026 10:52', type: 'Config Change', actor: 'duc.nguyen', message: 'Cập nhật trọng số model YOLOv8n v1.2' },
-  { id: 'LOG-7702', timestamp: '10/07/2026 10:14', type: 'Rule Override', actor: 'stylist.thao', message: 'Ghi đè nhãn AI Analysis cho tệp ANA-9003' },
-  { id: 'LOG-7703', timestamp: '10/07/2026 09:30', type: 'Model Deploy', actor: 'researcher.ai', message: 'Triển khai mô hình Decision Tree v1.1' },
-]
-
-export const systemConfig = {
-  allowedFileTypes: '.jpg, .jpeg, .png, .webp',
-  maxUploadSizeBytes: 5242880, // 5MB
-  redisHost: '127.0.0.1',
-  redisPort: 6379,
-  minioEndpoint: 'minio.fitzy.app',
-  sqlServerInstance: 'FITZY_SQL_2014',
-}
-
-export const adminUser = {
-  name: 'Đức Nguyễn',
-  initials: 'ĐN',
-  role: 'Super Admin',
-}
-
-export const storageStats = {
-  minio: {
-    status: 'Online',
-    usedSize: '1.2 TB',
-    totalSize: '5.0 TB',
-    bucketCount: 8,
-    fileCount: 84200,
-  },
-  sqlServer: {
-    status: 'Online',
-    dbSize: '24 GB',
-    logSize: '4.5 GB',
-    dbName: 'Fitzy_Production',
-    connectionCount: 142,
-    tableCount: 28,
-  },
-}
+];
