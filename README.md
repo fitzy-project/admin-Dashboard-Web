@@ -2,14 +2,13 @@
 
 <img src="https://img.shields.io/badge/Fitzy-Admin%20Dashboard-F59E0B?style=for-the-badge&logo=react&logoColor=white" alt="Fitzy Admin" />
 
-# Fitzy — AI Smart Closet · Admin Dashboard
+# Fitzy — AI Smart Closet · Web Admin Dashboard
 
 **Trung tâm điều phối tri thức thời trang và giám sát hiệu năng AI**
 
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Recharts](https://img.shields.io/badge/Recharts-2-8884D8?logo=chart.js&logoColor=white)](https://recharts.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 </div>
@@ -18,208 +17,131 @@
 
 ## 📖 Giới thiệu
 
-**Fitzy Admin Dashboard** là ứng dụng quản trị nội bộ của hệ thống **Fitzy – AI Smart Closet**, một nền tảng tủ đồ thông minh sử dụng trí tuệ nhân tạo (AI) để nhận diện quần áo và gợi ý phối đồ cá nhân hóa.
+**Fitzy Admin Dashboard** là phân hệ quản trị nội bộ cốt lõi của hệ sinh thái **Fitzy – AI Smart Closet** (nền tảng quản lý tủ đồ và phối đồ AI cá nhân hóa). Giao diện Web Admin dành cho Ban quản trị (Admin) và Chuyên gia thời trang (Stylist) để điều phối toàn bộ tri thức thời trang hệ thống, kiểm duyệt chất lượng nhận diện AI và quản lý dữ liệu người dùng.
 
-Trang Admin **không phải** để quản lý người dùng cuối. Thay vào đó, nó đóng vai trò là **trung tâm điều phối tri thức thời trang** và **bảng điều khiển giám sát vận hành AI**, bao gồm:
-
-- Quản lý toàn bộ **cơ sở tri thức thời trang** (danh mục, màu sắc, quy tắc phối)
-- Giám sát và hiệu chỉnh **kết quả phân tích AI** từ mô hình YOLOv8n và K-Means
-- Theo dõi hiệu năng mô hình và quản lý **dataset huấn luyện**
-- Đảm bảo **tuyệt đối bảo mật quyền riêng tư** — Admin không được phép truy cập bất kỳ thông tin cá nhân nào của người dùng
+Trang Web Admin được kết nối trực tiếp với **FastAPI Backend** và **Cơ sở dữ liệu SQLite/SQL Server**, hỗ trợ quản lý thời gian thực thay vì sử dụng mock data.
 
 ---
 
-## 🧩 Các module chức năng (10 Modules)
+## 🧩 Danh sách 6 phân hệ chính (6 Modules)
 
-| # | Module | Mô tả |
+| # | Phân hệ (Module) | Chức năng chi tiết |
 |---|--------|--------|
-| 1 | **Dashboard** | Tổng quan hệ thống: tổng ảnh, items, outfits, lượt AI phân tích, thông tin mô hình hiện tại |
-| 2 | **Categories** | CRUD danh mục trang phục chuẩn (T-Shirt, Jeans, Jacket, Dress, Bag...) |
-| 3 | **Colors** | Quản lý bảng màu hệ thống với mã HEX và Color Picker trực quan |
-| 4 | **Color Compatibility** | Ma trận điểm tương thích màu sắc — dữ liệu nền tảng cho AI Decision Tree |
-| 5 | **Clothing Rules** | Quy tắc phối đồ theo dịp sử dụng — "kiến thức thời trang" của hệ thống |
-| 6 | **AI Analysis** | Nhật ký nhận diện YOLOv8n & K-Means, xem Bounding Box, ghi đè nhãn sai |
-| 7 | **Recommendations** | Lịch sử gợi ý phối đồ ẩn danh, điểm đánh giá và quy tắc đã áp dụng |
-| 8 | **AI Models** | Quản lý phiên bản mô hình AI (Accuracy, Latency, đồng bộ trọng số) |
-| 9 | **Dataset Manager** | Theo dõi các tập dữ liệu train/val/test phục vụ học máy |
-| 10 | **System Settings** | Cấu hình hệ thống, RBAC phân quyền Admin, nhật ký tác vụ (System Logs) |
+| 1 | **Thống kê & Tổng quan (Dashboard)** | Biểu đồ trực quan hóa dữ liệu người dùng mới, cơ cấu danh mục trang phục, top thương hiệu và màu sắc thịnh hành sử dụng biểu đồ động Recharts từ API `/admin/dashboard-stats`. |
+| 2 | **Quần áo mẫu (Sample Catalog)** | CRUD kho quần áo chuẩn hóa của hệ thống. Hỗ trợ upload ảnh thật lên máy chủ lưu trữ (MinIO/Local Storage) phục vụ dữ liệu gợi ý dùng chung. |
+| 3 | **Quản lý Người dùng (User Management)** | Quản lý danh sách tài khoản, hồ sơ hình thể (chiều cao, cân nặng, size áo/quần), gu thời trang ưa thích và hỗ trợ khóa/kích hoạt tài khoản. |
+| 4 | **Quy tắc AI & Stylist (AI Rules)** | Cấu hình ma trận phối màu (Color Compatibility), danh sách các cặp đồ kỵ phối (Incompatible Combos) và lưu trữ triết lý phối đồ từ Stylist. |
+| 5 | **Danh mục & Thuộc tính (Attributes)** | Quản lý cây phân cấp danh mục quần áo (Category Tree), danh sách các thương hiệu (Brands), bảng màu chuẩn (Colors với Color Picker) và chất liệu vải (Materials). |
+| 6 | **Nhật ký AI & Kiểm duyệt (AI Logs)** | Theo dõi lịch sử quét ảnh nhận diện của AI (YOLOv8 & K-Means), cơ chế ghi đè (Override) nhãn sai của Admin và quản lý báo lỗi phản hồi từ người dùng. |
 
 ---
 
-## 🔐 Chính sách bảo mật & Quyền riêng tư
+## 🛠️ Kiến trúc kỹ thuật & Tech Stack
 
-> **Admin không được phép truy cập:**
-> - Thông tin cá nhân người dùng (email, số điện thoại, họ tên, mật khẩu)
-> - Tủ đồ cá nhân và lịch sử sử dụng cụ thể
-> - Ảnh gốc có thể nhận diện danh tính
+### Frontend Web Admin
+* **React 18 & Vite 5:** Xây dựng ứng dụng đơn trang (SPA) tốc độ phản hồi cực nhanh.
+* **Tailwind CSS 3:** Hệ thống CSS tiện ích giúp tùy chỉnh giao diện Premium, hỗ trợ Dark Mode.
+* **Lucide React:** Bộ icons trực quan và hiện đại.
+* **API Client (services/api.js):** Đồng bộ hóa token JWT tự động gắn vào Header `Authorization`, hỗ trợ auto-login và xử lý đa luồng dữ liệu.
 
-Mọi dữ liệu thống kê chỉ được hiển thị dưới dạng **tổng hợp ẩn danh (anonymized aggregated data)**.
-
----
-
-## 🛠️ Kiến trúc kỹ thuật
-
-### Tech Stack
-
-| Công nghệ | Vai trò |
-|-----------|---------|
-| **React 18** | UI Framework chính |
-| **Vite 5** | Build tool và Dev server siêu nhanh |
-| **Tailwind CSS 3** | Utility-first CSS framework |
-| **Lucide React** | Bộ icon vector nhẹ và thẩm mỹ |
-| **Recharts** | Thư viện biểu đồ dữ liệu (LineChart, PieChart) |
-
-### Cơ sở hạ tầng AI (Backend - tham khảo)
-
-| Thành phần | Công nghệ |
-|-----------|-----------|
-| **Nhận diện trang phục** | YOLOv8n (PyTorch) |
-| **Phân tích màu sắc** | K-Means Clustering |
-| **Gợi ý phối đồ** | Decision Tree Algorithm |
-| **Lưu trữ ảnh** | MinIO (S3-compatible) |
-| **Cơ sở dữ liệu** | Microsoft SQL Server 2014 |
-| **Bộ nhớ cache** | Redis |
+### Mối liên kết hệ thống (tham khảo)
+* **Backend:** FastAPI (Python) cung cấp REST API tài liệu hóa qua Swagger UI (`/docs`).
+* **Database:** SQLite (chạy dev) và Microsoft SQL Server 2014 (chạy production).
+* **Storage:** MinIO (lưu trữ ảnh đám mây) và Local Static File Server.
 
 ---
 
-## 📁 Cấu trúc thư mục
+## 📁 Cấu trúc thư mục dự án thực tế
 
 ```text
 fitzy-admin/
-├── public/
-│   └── fitzy.svg                    # Favicon
+├── .env                             # Cấu hình biến môi trường kết nối API
+├── index.html                       # Entry HTML chính
+├── package.json                     # Quản lý thư viện phụ thuộc
+├── tailwind.config.js               # Cấu hình Tailwind CSS
+├── vite.config.js                   # Cấu hình dev-server Vite
 ├── src/
+│   ├── App.jsx                      # Quản lý định tuyến và JWT Auto-login
+│   ├── main.jsx                     # Entry JavaScript
+│   ├── index.css                    # Định nghĩa Token Design System & Utility
 │   ├── components/
-│   │   ├── AiLogsTable.jsx          # Bảng nhật ký AI logs
-│   │   ├── ColorPieChart.jsx        # Biểu đồ tròn phân bố màu
-│   │   ├── Sidebar.jsx              # Thanh điều hướng trái
-│   │   ├── StatCard.jsx             # Card thống kê nhanh
-│   │   ├── Topbar.jsx               # Thanh tiêu đề & avatar admin
-│   │   └── UploadsChart.jsx         # Biểu đồ cột lượt tải ảnh
+│   │   ├── Sidebar.jsx              # Thanh điều hướng trái phân quyền (RBAC)
+│   │   └── Topbar.jsx               # Header hiển thị thông tin admin đăng nhập
 │   ├── data/
-│   │   └── mockData.js              # Dữ liệu giả lập toàn hệ thống
+│   │   └── mockData.js              # Dữ liệu fallback
+│   ├── services/
+│   │   └── api.js                   # API Client kết nối Backend (JWT, CRUD, Upload)
 │   ├── pages/
-│   │   ├── LoginPage.jsx            # Trang đăng nhập bảo mật
-│   │   ├── DashboardPage.jsx        # Module 1: Dashboard tổng quan
-│   │   ├── CategoriesPage.jsx       # Module 2: Quản lý danh mục
-│   │   ├── ColorsPage.jsx           # Module 3: Quản lý màu sắc
-│   │   ├── ColorCompatPage.jsx      # Module 4: Quy tắc phối màu
-│   │   ├── ClothingRulesPage.jsx    # Module 5: Quy tắc phối đồ
-│   │   ├── AiAnalysisPage.jsx       # Module 6: AI Analysis logs
-│   │   ├── RecommendationsPage.jsx  # Module 7: Gợi ý phối đồ
-│   │   ├── AiModelsPage.jsx         # Module 8: Mô hình AI
-│   │   ├── DatasetPage.jsx          # Module 9: Dataset Manager
-│   │   └── SettingsPage.jsx         # Module 10: Cài đặt hệ thống
-│   ├── App.jsx                      # Root component & routing logic
-│   ├── index.css                    # Global styles & Tailwind directives
-│   └── main.jsx                     # Entry point
-├── index.html
-├── package.json
-├── tailwind.config.js
-└── vite.config.js
+│   │   ├── LoginPage.jsx            # Giao diện Đăng nhập kính mờ (Glassmorphism)
+│   │   ├── DashboardPage.jsx        # Phân hệ 1: Thống kê & Tổng quan
+│   │   ├── SampleCatalogPage.jsx    # Phân hệ 2: Quần áo mẫu
+│   │   ├── UserManagementPage.jsx   # Phân hệ 3: Quản lý người dùng
+│   │   ├── AiRulesPage.jsx          # Phân hệ 4: Quản lý quy tắc AI
+│   │   ├── AttributesPage.jsx       # Phân hệ 5: Danh mục & Thuộc tính
+│   │   └── AiLogsPage.jsx           # Phân hệ 6: Nhật ký AI & Kiểm duyệt
 ```
 
 ---
 
-## 🚀 Khởi động dự án
+## 🚀 Hướng dẫn khởi chạy dự án
 
 ### Yêu cầu môi trường
+* **Node.js** >= 18
+* **npm** >= 9
+* **Fitzy Backend (FastAPI)** đang chạy tại cổng `8000`.
 
-- **Node.js** >= 18
-- **npm** >= 9
+### Các bước cài đặt và khởi chạy
+1. **Tạo file cấu hình kết nối API:**
+   Tạo file `.env` tại thư mục gốc của frontend:
+   ```env
+   VITE_API_URL=http://localhost:8000
+   ```
 
-### Các bước cài đặt
+2. **Cài đặt thư viện:**
+   ```bash
+   npm install
+   ```
 
-```bash
-# 1. Clone repo
-git clone https://github.com/fitzy-project/admin-Dashboard-Web.git
-cd admin-Dashboard-Web
+3. **Khởi chạy Development Server:**
+   ```bash
+   npm run dev
+   ```
+   Ứng dụng sẽ chạy tại địa chỉ: `http://localhost:5173`.
 
-# 2. Cài đặt dependencies
-npm install
-
-# 3. Khởi động dev server
-npm run dev
-```
-
-Dev server sẽ khởi động tại `http://localhost:5173`.
-
-### Build Production
-
-```bash
-npm run build
-```
-
-Kết quả build sẽ nằm trong thư mục `dist/`.
-
----
-
-## 🔑 Tài khoản đăng nhập Demo
-
-| Tài khoản | Mật khẩu | Vai trò |
-|-----------|----------|---------|
-| `duc.nguyen` | `admin123` | Super Admin |
-| `stylist.thao` | `admin123` | Stylist Lead |
-| `researcher.ai` | `admin123` | AI Researcher |
-
-> **Lưu ý bảo mật:** Đây là thông tin tài khoản Demo phục vụ phát triển và kiểm thử. Không sử dụng các thông tin này trong môi trường Production.
+4. **Biên dịch Production:**
+   ```bash
+   npm run build
+   ```
+   Tệp tin tối ưu hóa sẽ nằm trong thư mục `dist/`.
 
 ---
 
-## 📊 Công thức tính điểm gợi ý phối đồ (Rule Engine v12)
+## 🔑 Tài khoản đăng nhập kiểm thử (Seeded trong DB)
 
-Hệ thống sử dụng **Hybrid Cold-Start Recommender** với 8 scorer modules để chấm điểm đa tiêu chí:
-
-$$\text{Final Score} = \sum_{i \in \text{active scorers}} w_i^{\text{norm}} \times S_i \quad \text{(tất cả } S_i \in [0, 10]\text{)}$$
-
-### Bảng 8 Scorer & Trọng số gốc
-
-| Scorer | Trọng số gốc | Trạng thái | Mô tả |
-|--------|:------------:|:----------:|-------|
-| **Category/KBR** | 0.35 | 🟢 Luôn bật | Tra cặp category trong `fashion_rules.json` + nguồn Việt Nam. Polyvore × 1 + VN × 2 ÷ 3 |
-| **Color** | 0.35 | 🟢 Luôn bật | 70% Data Evidence Score + 30% Color Wheel Score (monochromatic → complementary) |
-| **User History** | 0.20 | 🔵 Optional | Học gu cá nhân từ event thật: view +0.2, like +1.5, wear +3.0, dislike -2.0 |
-| **Material** | 0.15 | 🔵 Optional | Tra cặp chất liệu trong `material_rules.json` (38 rule) |
-| **Trend** | 0.15 | 🔵 Optional | Cộng điểm từ TikTok/Facebook trend signals (76 signals). Rank 1-5 = +4đ |
-| **Occasion** | 0.10 | 🔵 Optional | casual / work / formal / party / travel — 843 quan sát từ 27 nguồn VN |
-| **Body Shape** | 0.10 | 🔵 Optional | pear / apple / inverted_triangle / rectangle / hourglass |
-| **Weather** | 0.10 | 🔵 Optional | hot / cold — 551 quan sát từ 18 nguồn VN |
-
-### Cơ chế Normalize động
-
-Trọng số tự chia lại theo số scorer đang bật, đảm bảo **tổng = 100%**:
-- Không bật optional: `Final = 50% Category + 50% Color`
-- Bật thêm Material + Occasion: Category 36.8%, Color 36.8%, Material 15.8%, Occasion 10.5%
-
-### Nguyên tắc Fallback
-
-Scorer nào **thiếu dữ liệu** nhận điểm **5/10 trung lập** (không phạt, không thưởng). Scorer **không bật** thì hoàn toàn không tham gia công thức.
-
-Admin có thể hiệu chỉnh trọng số, bật/tắt scorer và quản lý knowledge base qua các module trên dashboard.
+| Tài khoản (Username) | Mật khẩu | Vai trò (Role) | Ghi chú |
+|-----------|----------|---------|---------|
+| `duc.nguyen` | `admin123` | **Admin** | Quyền quản trị tối cao |
+| `stylist.thao` | `admin123` | **Stylist** | Quyền stylist kiểm duyệt quy tắc phối đồ |
 
 ---
 
-## 🎨 Design System
+## 📊 Công thức gợi ý phối đồ của AI (Rule Engine v12)
 
-Giao diện được thiết kế theo phong cách **Premium Admin** kết hợp:
-- **Bảng màu Amber + Slate** — ấm áp, chuyên nghiệp và dễ đọc
-- **Glassmorphism** — trang Đăng nhập với hiệu ứng kính mờ sang trọng
-- **Micro-animations** — hover, transition và loading states mượt mà
-- **Responsive layout** — tương thích mọi kích thước màn hình
+Hệ thống gợi ý sử dụng thuật toán **Hybrid Cold-Start Recommender** kết hợp 8 bộ chấm điểm (Scorers) với cơ chế normalize trọng số động để đảm bảo tổng điểm luôn là 100%:
 
----
+$$\text{Điểm kết quả} = \sum_{i \in \text{scorers}} w_i^{\text{norm}} \times S_i \quad (S_i \in [0, 10])$$
 
-## 👥 Đội ngũ phát triển
+* **Trọng số phân bổ mặc định:**
+  * 0.35: Tương thích phân nhóm (Category Scorer)
+  * 0.35: Phối hợp màu sắc (Color Scorer)
+  * 0.20: Lịch sử người dùng (User History Scorer)
+  * 0.15: Tương thích chất liệu (Material Scorer)
+  * 0.15: Xu hướng thời trang (Trend Scorer)
+  * 0.10: Dịp mặc đồ (Occasion Scorer)
+  * 0.10: Hình thể cá nhân (Body Shape Scorer)
+  * 0.10: Điều kiện thời tiết (Weather Scorer)
 
-| Thành viên | Vai trò |
-|------------|---------|
-| Đức Nguyễn | Full-stack Developer, AI/ML Integration |
-
----
-
-## 📄 Giấy phép
-
-Dự án được phân phối theo giấy phép [MIT License](LICENSE).
+* **Cơ chế Fallback:** Bất kỳ bộ chấm điểm nào bị thiếu dữ liệu cục bộ sẽ được gán điểm trung lập **5/10** để không làm sai lệch kết quả tổng thể.
 
 ---
 
